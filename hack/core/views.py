@@ -4,7 +4,9 @@ from .models import (
     Patient,
     Inferma,
     Evidence,
-    Specialist
+    Doctor,
+    Diagnostic,
+    Test
 )
 from .infermedica import (
     init_inf,
@@ -28,9 +30,23 @@ def init(request):
     name = request.GET.get("name")
     age = int(request.GET.get("age"))
     sex = request.GET.get("sex")
+    height = float(request.GET.get("height"))
+    weight = float(request.GET.get("weight"))
+    street = request.GET.get("street")
+    city = request.GET.get("city")
+    phone = request.GET.get("phone")
     text = request.GET.get("text")
 
-    patient = Patient.objects.create(name=name, age=age, sex=sex)
+    patient = Patient.objects.create(
+        name = name,
+        age = age,
+        sex = sex,
+        height = height,
+        weight = weight,
+        street = street,
+        city = city,
+        phone = phone
+    )
     response = init_inf(age=age, sex=sex, text=text)
     inferma = Inferma.objects.create(patient=patient)
 
@@ -94,12 +110,6 @@ def continue_query(request):
         except:
             response = get_specialist(data)
             specialist = response['recommended_specialist']['name']
-            try:
-                spec = Specialist.objects.get(name=specialist)
-            except:
-                spec = Specialist.objects.create(name=specialist)
-            patient.specialist = spec
-            patient.save()
             return JsonResponse({
                 'key': key,
                 'complete': True,
@@ -114,12 +124,6 @@ def continue_query(request):
     else:
         response = get_specialist(data)
         specialist = response['recommended_specialist']['name']
-        try:
-            spec = Specialist.objects.get(name=specialist)
-        except:
-            spec = Specialist.objects.create(name=specialist)
-        patient.specialist = spec
-        patient.save()
         return JsonResponse({
             'key': key,
             'complete': True,
@@ -127,10 +131,26 @@ def continue_query(request):
         })
 
 def get_tests(request):
+    key = request.GET.get('key')
     specialization = request.GET.get('specialist')
     address = request.GET.get('address')
-    lst = specialists.get(address.lower()).get(specialization.lower())
+    lst = specialists.get(address.title()).get(specialization.lower())
     return JsonResponse({
+        'key': key,
         'tests': all_tests.get(specialization.lower()),
         'specialists': sample(lst, min(len(lst), 5))
+    })
+
+def set_specialist(request):
+    key = request.GET.get('key')
+    patient = Inferma.objects.get(key=key).patient
+    doctor_key = request.GET.get('doctor')
+    doctor = Doctor.objects.get(key=doctor_key)
+    Diagnostic.objects.create(
+        patient = patient,
+        doctor = doctor
+    )
+
+    return JsonResponse({
+        'success': True
     })

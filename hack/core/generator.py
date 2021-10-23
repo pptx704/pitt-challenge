@@ -1825,8 +1825,8 @@ temp = {
     "Staten Island": {},
 }
 
-with open('file.tsv', 'w', encoding='utf-8') as file:
-    #'''
+with open('file.tsv', 'r', encoding='utf-8') as file:
+    '''
     while names:
         name = names.pop()
         address_ = choice(address)
@@ -1838,14 +1838,29 @@ with open('file.tsv', 'w', encoding='utf-8') as file:
         borough = choice(boroughs)
         file.write(f"{id}\t{name}\t{email.lower()}@gmail.com\t{speciality}\t{borough}\t{address_}\t{zip}\n")
     '''
+    #id	name	email	specilization	borough	address	zip
     reader = DictReader(file, delimiter='\t')
     for i in reader:
-        if temp[i['borough']].get(i['speciality']):
-            temp[i['borough']][i['speciality']].append(i['name'])
+        print(i)
+        if temp[i['borough']].get(i['specialization']):
+            print("found")
+            temp[i['borough']][i['specialization']].append({
+                'id': i['id'],
+                'name': i['name'],
+                'address': i['address'],
+                'email': i['email']
+            })
         else:
-            temp[i['borough']][i['speciality']] = []
-            temp[i['borough']][i['speciality']].append(i['name'])
+            print("not found")
+            temp[i['borough']][i['specialization']] = []
+            temp[i['borough']][i['specialization']].append({
+                'id': i['id'],
+                'name': i['name'],
+                'address': i['address'],
+                'email': i['email']
+            })
+    print(temp)
     newfile = open('newfile.json', 'w', encoding='utf-8')
     json.dump(temp, newfile)
-    '''
-    file.close()
+    #'''
+    newfile.close()

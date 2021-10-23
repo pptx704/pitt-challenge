@@ -1,5 +1,5 @@
 from django.db import models
-from .utils import sex_choice
+from .utils import sex_choice, boroughs
 from uuid import uuid4
 
 # Create your models here.
@@ -7,26 +7,15 @@ class Patient(models.Model):
     name = models.CharField(max_length=64)
     age = models.IntegerField()
     sex = models.CharField(choices=sex_choice, max_length=7)
-    address = models.CharField(max_length=256, null=True, blank=True)
-    specialist = models.ForeignKey('Specialist', related_name='patients', on_delete=models.SET_NULL, blank=True, null=True)
+    height = models.FloatField()
+    weight = models.FloatField()
+    street = models.CharField(max_length=256, null=True, blank=True)
+    city = models.CharField(max_length=20, choices=boroughs)
+    phone = models.CharField(max_length=20)
 
     def __str__(self) -> str:
         return self.name
-    
-class Specialist(models.Model):
-    name = models.CharField(max_length=32)
 
-    def __str__(self) -> str:
-        return self.name
-
-class Diagnosis(models.Model):
-    name = models.CharField(max_length=64)
-    patient = models.ForeignKey(Patient, related_name='diagnosis', on_delete=models.CASCADE)
-    value = models.FloatField()
-    Specialist = models.ForeignKey(Specialist, related_name='diagnosis', on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return self.name
 
 class Inferma(models.Model):
     patient = models.OneToOneField(Patient, related_name="inferma", on_delete=models.CASCADE)
@@ -54,3 +43,31 @@ class Evidence(models.Model):
             data['source'] = 'initial'
 
         return data
+
+class Doctor(models.Model):
+    key = models.CharField(max_length=32, unique=True)
+    name = models.CharField(max_length=64)
+    department = models.CharField(max_length=64)
+    city = models.CharField(max_length=20, choices=boroughs)
+    email = models.EmailField(max_length=128)
+
+    def __str__(self):
+        return f"{self.name}, {self.department.title()}, {self.city}"
+
+class Diagnostic(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='diagnostics')
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='diagnostics')
+    emergency = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f"{self.patient} - {self.doctor}"
+
+class Test(models.Model):
+    name = models.CharField(max_length=64)
+    value = models.FloatField()
+    unit = models.CharField(max_length=16)
+    diagnostic = models.ForeignKey(Diagnostic, on_delete=models.CASCADE, related_name='tests')
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.diagnostic.patient} - {self.diagnostic.doctor} - {self.time}"

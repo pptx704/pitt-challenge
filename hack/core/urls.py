@@ -5,4 +5,5 @@ urlpatterns = [
     path("init", views.init, name="init"),
     path("continue", views.continue_query, name='continue'),
     path("get-tests", views.get_tests, name='get_tests'),
+    path('set-specialist', views.set_specialist, name='set_specialist')
 ]

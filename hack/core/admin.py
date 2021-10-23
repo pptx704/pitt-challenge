@@ -13,6 +13,10 @@ class EvidenceAdmin(admin.ModelAdmin):
 class InfermaAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(Specialist)
-class SpecialistAdmin(admin.ModelAdmin):
+@admin.register(Doctor)
+class DoctorAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Diagnostic)
+class DiagnosticAdmin(admin.ModelAdmin):
     pass

@@ -204,15 +204,16 @@
         "height": "float",
         "weight": "int",
         "phone": "string",
-        "key": "string", //patient key from init api
+        "address": "string",
+        "key": "string",
         "emergency": "bool",
         "tests": {
         "Test Name": [
                 {
                     "value": "int",
                     "unit": "string",
-                    "date": "string", // "01 Jan, 1968"
-                    "time": "string" // "14:20"
+                    "date": "string",
+                    "time": "string"
                 }
             ]
         }
@@ -220,6 +221,40 @@
 ]
 ```
 
+
+`/get-patient`: Called from doctor's view
+
+**Method**: GET
+
+**Params**: 
+
+* key: Patient's key
+
+**Response**:
+
+```json
+{
+    "name": "string",
+    "age": "int",
+    "sex": "string",
+    "height": "float",
+    "weight": "int",
+    "phone": "string",
+    "address": "string",
+    "key": "string",
+    "emergency": "bool",
+    "tests": {
+    "Test Name": [
+            {
+                "value": "int",
+                "unit": "string",
+                "date": "string",
+                "time": "string"
+            }
+        ]
+    }
+}
+```
 
 
 `/toggle-emergency`: To mark/unmark a patient as emergency

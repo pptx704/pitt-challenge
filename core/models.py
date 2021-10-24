@@ -23,6 +23,7 @@ class Patient(models.Model):
             'sex': self.sex,
             'height': self.height,
             'weight': self.weight,
+            'address': f"{self.street}, {self.city}",
             'phone': self.phone
         }
 

@@ -172,6 +172,21 @@ def get_patient_data(request):
         lst.append(patient)
     return JsonResponse(lst, safe=False)
 
+def get_patient(request):
+    key = request.GET.get('key')
+    patient_ = Inferma.objects.get(key=key).patient
+    patient = patient_.serialize()
+    tests = patient_.diagnostics.first().tests.all()
+    patient['tests'] = dict()
+    for test in tests:
+        if patient['tests'].get(test.name):
+            patient['tests'][test.name].append(test.serialize())
+        else:
+            patient['tests'][test.name] = []
+            patient['tests'][test.name].append(test.serialize())
+    
+    return JsonResponse(patient)
+
 def toggle_emergency(request):
     key = request.GET.get('key')
     diagnostic = Inferma.objects.get(key=key).patient.diagnostics.first()

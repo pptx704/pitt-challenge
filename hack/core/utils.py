@@ -23,8 +23,8 @@ boroughs = (
 )
 
 all_tests = {
-    "allergologists": ["RBC Count", "WBC Count"],
-    "dermatologist": ["RBC Count", "WBC Count", "Urine test"],
+    "allergologist": ["RBC Count", "WBC Count"],
+    "dermatologist": ["RBC Count", "WBC Count", "Urine Test"],
     "psychologist": [ "RBC Count", "WBC Count"],
     "gastroenterologist": ["RBC Count", "WBC Count"],
     "ophthalmologist": ["RBC Count", "WBC Count"],
@@ -35,14 +35,151 @@ all_tests = {
     "gynecologist": ["RBC Count", "WBC Count", "Urine Test"],
     "endocrinologist": ["RBC Count", "WBC Count"],
     "rheumatologist": ["Erythrocyte Sedimentation Rate (ESR)", "RBC Count", "WBC Count"],
-    "urologist": ["RBC Count", "WBC Count", "Urine test"],
+    "urologist": ["RBC Count", "WBC Count", "Urine Test"],
     "nephrologist": ["RBC Count", "WBC Count", "Creatinine Test", "Urine Test"],
-    "hematologist": ["RBC Count", "WBC Count", "Haemoglobin Count", "Platelets Count", "Hematocrit test"],
+    "hematologist": ["RBC Count", "WBC Count", "Haemoglobin Count", "Platelets Count", "Hematocrit Test"],
     "oncologist": ["CBC count"],
-    "diabetologists": ["BP Test", "Lipid Profile LDL", "Lipid Profile HDL", "Sugar Test"],
+    "diabetologist": ["BP Test", "Lipid Profile LDL", "Lipid Profile HDL", "Sugar Test"],
     "infectiologist": ["RBC Count", "WBC Count"],
     "pediatrician": ["RBC Count", "WBC Count", "Urine Test"],
-    "toxicologists": ["RBC Count", "WBC Count", "Urine Test"]
+    "toxicologist": ["RBC Count", "WBC Count", "Urine Test"]
+}
+
+test_values = {
+    "RBC Count":{
+        "max":5.72,
+        "min":4.32,
+        "pot_max":6.3,
+        "pot_min":3.9,
+        "unit":"million cells/mcL"
+    },
+    "WBC Count":{
+        "max":10500,
+        "min":3500,
+        "pot_max":13000,
+        "pot_min":2500,
+        "unit":"cells/mcL"
+    },
+    "Urine Test":{
+        "max":8.5,
+        "min":5,
+        "pot_max":10.0,
+        "pot_min":3.5,
+        "unit":"pH"
+    },
+    "BP Test":{
+        "max":130,
+        "min":80,
+        "pot_max":160,
+        "pot_min":60,
+        "unit":"mm Hg P"
+    },
+  
+    "Cardiac Output":{
+        "max":8,
+        "min":4,
+        "pot_max":9.5,
+        "pot_min":3.0,
+        "unit":"L/min"
+    },
+    "Stroke Volume":{
+        "max":100,
+        "min":50,
+        "pot_max":120,
+        "pot_min":40,
+        "unit":"mL"
+    },
+    "Heart Rate":{
+        "max":100,
+        "min":60,
+        "pot_max":120,
+        "pot_min":45,
+        "unit":"bpm"
+    },
+    "Spirometry":{
+        "max":120,
+        "min":80,
+        "pot_max":150,
+        "pot_min":60,
+        "unit":"%"
+    },
+    "Pulse Oximetry":{
+        "max":100,
+        "min":90,
+        "pot_max":100,
+        "pot_min":86,
+        "unit":"bpm"
+    },
+    "Glucose Test":{
+        "max":99,
+        "min":70,
+        "pot_max":120,
+        "pot_min":55,
+        "unit":"mg/dL"
+    },
+    "Potassium Test":{
+        "max":5.1,
+        "min":3.5,
+        "pot_max":5.8,
+        "pot_min":3.0,
+        "unit":"mEq/L"
+    },
+    "Erythrocyte Sedimentation Rate (ESR)":{
+        "max":22,
+        "min":0,
+        "pot_max":25,
+        "pot_min":0,
+        "unit":"mm/hr"
+    },
+    "Creatinine Test":{
+        "max":1.3,
+        "min":0.9,
+        "pot_max":1.5,
+        "pot_min":0.75,
+        "unit":"mg/dL"
+    },
+    "Haemoglobin Count":{
+        "max":17.5,
+        "min":13.5,
+        "pot_max":20.5,
+        "pot_min":10.5,
+        "unit":"g/dL"
+    },
+    "Platelets Count":{
+        "max":450000,
+        "min":150000,
+        "pot_max":60000,
+        "pot_min":12000,
+        "unit":"/mcL"
+    },
+    "Hematocrit Test":{
+        "max":50,
+        "min":38.8,
+        "pot_max":60.0,
+        "pot_min":30.0,
+        "unit":"%"
+    },
+    "Lipid Profile HDL":{
+        "max":60,
+        "min":40,
+        "pot_max":70,
+        "pot_min":30,
+        "unit":"mg/dL"
+    },
+    "Lipid Profile LDL":{
+        "max":160,
+        "min":100,
+        "pot_max":200,
+        "pot_min":80,
+        "unit":"mg/dL"
+    },
+    "Sugar Test":{
+        "max":125,
+        "min":0,
+        "pot_max":150,
+        "pot_min":50,
+        "unit":"mg/dL"
+    }
 }
 
 specialists = {
@@ -619,7 +756,7 @@ specialists = {
                 "email": "yuliya_giyaur_10451@gmail.com"
             }
         ],
-        "toxicologists": [
+        "toxicologist": [
             {
                 "id": "b92cb691c0434808b553d37a39282710",
                 "name": "Jessica Borrero",
@@ -761,7 +898,7 @@ specialists = {
                 "email": "christine_rodler_11435@gmail.com"
             }
         ],
-        "diabetologists": [
+        "diabetologist": [
             {
                 "id": "ea03b2f4e6b88d052ad85fadcea20640",
                 "name": "Mariela Jimenez",
@@ -1297,7 +1434,7 @@ specialists = {
                 "email": "robert_zaloom_11355@gmail.com"
             }
         ],
-        "allergologists": [
+        "allergologist": [
             {
                 "id": "a83306d4fa4c52513b90694eb8b4d6d9",
                 "name": "Polina Liss",
@@ -1759,7 +1896,7 @@ specialists = {
                 "email": "moses_shalit_11237@gmail.com"
             }
         ],
-        "diabetologists": [
+        "diabetologist": [
             {
                 "id": "636a4959d80c2c437beb8f5dd57a69d8",
                 "name": "Marjorie Dugue",
@@ -2051,7 +2188,7 @@ specialists = {
                 "email": "james_gough_11224@gmail.com"
             }
         ],
-        "toxicologists": [
+        "toxicologist": [
             {
                 "id": "76d01324668a1135a3bc83784162c521",
                 "name": "Luz Ares",
@@ -2355,7 +2492,7 @@ specialists = {
                 "email": "baldevbhai_v._patel_10032@gmail.com"
             }
         ],
-        "allergologists": [
+        "allergologist": [
             {
                 "id": "138a8700614ea9a7b52d0d32143f6706",
                 "name": "Rabeya Chowdhury",
@@ -2537,7 +2674,7 @@ specialists = {
         ]
     },
     "Cedarhurst": {
-        "allergologists": [
+        "allergologist": [
             {
                 "id": "3957d52917937f9e56a8d32e8feee981",
                 "name": "Michael Bruno",
@@ -3021,7 +3158,7 @@ specialists = {
                 "email": "alan_diaz_11373@gmail.com"
             }
         ],
-        "toxicologists": [
+        "toxicologist": [
             {
                 "id": "2d2370b91f0ece1fc50583e15e0515ad",
                 "name": "Nazia Ajani",
@@ -3561,7 +3698,7 @@ specialists = {
                 "email": "joseph_paul_10023@gmail.com"
             }
         ],
-        "diabetologists": [
+        "diabetologist": [
             {
                 "id": "c7c520420076ffa08b8a1c33f4a3ff5a",
                 "name": "Weimin Qu",
@@ -4269,7 +4406,7 @@ specialists = {
                 "email": "vera_antonios_11354@gmail.com"
             }
         ],
-        "diabetologists": [
+        "diabetologist": [
             {
                 "id": "28f279d87bbabe61fa5715c9f15d4bca",
                 "name": "Jung-ah Han",
@@ -4325,7 +4462,7 @@ specialists = {
                 "email": "mohamed_azam_11203@gmail.com"
             }
         ],
-        "allergologists": [
+        "allergologist": [
             {
                 "id": "994f4d1634c03572779fd4dc372ca4c0",
                 "name": "Sultan Ahmed",
@@ -4791,7 +4928,7 @@ specialists = {
                 "email": "kim_woods_10457@gmail.com"
             }
         ],
-        "toxicologists": [
+        "toxicologist": [
             {
                 "id": "e185bc0c6af35b523bd29f37ab4f34b2",
                 "name": "Petr Itzhak",
@@ -5465,7 +5602,7 @@ specialists = {
                 "email": "edward_geisler_10032@gmail.com"
             }
         ],
-        "allergologists": [
+        "allergologist": [
             {
                 "id": "3f851c361e50cc5003c020c17cffad4a",
                 "name": "Farooq Umar Qureshi",
@@ -5669,7 +5806,7 @@ specialists = {
                 "email": "louisa_ziglar_10011@gmail.com"
             }
         ],
-        "diabetologists": [
+        "diabetologist": [
             {
                 "id": "bd0b4635fa20280966386d3bc05d81ff",
                 "name": "Mario Lavelanet",
@@ -5909,7 +6046,7 @@ specialists = {
                 "email": "g_sahni_11211@gmail.com"
             }
         ],
-        "toxicologists": [
+        "toxicologist": [
             {
                 "id": "332be2ea24d1c49b82d85a75d5a75ee1",
                 "name": "Lance Rubel",
@@ -6599,7 +6736,7 @@ specialists = {
                 "email": "john_c._riggs_11230@gmail.com"
             }
         ],
-        "toxicologists": [
+        "toxicologist": [
             {
                 "id": "d3939f3e82f4b6b0a1f0bff6c9069f11",
                 "name": "Alfredo Maduro",
@@ -6717,7 +6854,7 @@ specialists = {
                 "email": "austin_chen_11691@gmail.com"
             }
         ],
-        "diabetologists": [
+        "diabetologist": [
             {
                 "id": "79e33fe45426c52f1d285652c2cc8b20",
                 "name": "Pin Mei Yao",
@@ -6871,7 +7008,7 @@ specialists = {
                 "email": "oded_preis_11103@gmail.com"
             }
         ],
-        "allergologists": [
+        "allergologist": [
             {
                 "id": "9b3244d79d7fe9cffffc6c32b083b25a",
                 "name": "Daysi Baez",
@@ -7929,7 +8066,7 @@ specialists = {
                 "email": "darren_esposito_11211@gmail.com"
             }
         ],
-        "diabetologists": [
+        "diabetologist": [
             {
                 "id": "6f35d31cc730c98251e4201b318819eb",
                 "name": "Stella Ilyayeva",
@@ -8325,7 +8462,7 @@ specialists = {
                 "email": "domingo_santana_11355@gmail.com"
             }
         ],
-        "allergologists": [
+        "allergologist": [
             {
                 "id": "6b60da7c0aaeacbe7e9673a80edb575f",
                 "name": "Jose Fulgencio Delmonte",
@@ -8449,7 +8586,7 @@ specialists = {
                 "email": "jorge_serje_10037@gmail.com"
             }
         ],
-        "toxicologists": [
+        "toxicologist": [
             {
                 "id": "076b60dce6f6dd3a32f1847ae361f4f6",
                 "name": "Marissa Santos",
@@ -8627,7 +8764,7 @@ specialists = {
         ]
     },
     "Queens": {
-        "toxicologists": [
+        "toxicologist": [
             {
                 "id": "3347582cb6ab72a46c39ab6cc520f4b6",
                 "name": "Nicole Arcentales",
@@ -8707,7 +8844,7 @@ specialists = {
                 "email": "pramila_kolisetty_11355@gmail.com"
             }
         ],
-        "allergologists": [
+        "allergologist": [
             {
                 "id": "a7853e7f3b9ae97faaad4a5166b202cd",
                 "name": "Anna DiBona",
@@ -8787,7 +8924,7 @@ specialists = {
                 "email": "carmen_lazala_10034@gmail.com"
             }
         ],
-        "diabetologists": [
+        "diabetologist": [
             {
                 "id": "f3ce64cd89054cc1c9a946c9b9bbce47",
                 "name": "Miroslawa Kudej",
@@ -10755,7 +10892,7 @@ specialists = {
                 "email": "francis_hayden_11205@gmail.com"
             }
         ],
-        "toxicologists": [
+        "toxicologist": [
             {
                 "id": "775b0328357293fb4bd4ec291e952704",
                 "name": "Marco A. Garcia",
@@ -10881,7 +11018,7 @@ specialists = {
                 "email": "chana_lieber_10453@gmail.com"
             }
         ],
-        "diabetologists": [
+        "diabetologist": [
             {
                 "id": "cb5ca2c447bc1ae225b6df218a0734af",
                 "name": "Marlene Pitamber",
@@ -10963,7 +11100,7 @@ specialists = {
                 "email": "luis_guerrero_10032@gmail.com"
             }
         ],
-        "allergologists": [
+        "allergologist": [
             {
                 "id": "461d5a3fdb35085aad15e32abcb03324",
                 "name": "Ching Sum Leung",

@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from random import sample
+from random import sample, uniform, randint
 from .models import (
     Patient,
     Inferma,
@@ -16,17 +16,12 @@ from .infermedica import (
 
 from .utils import (
     all_tests,
-    specialists
+    specialists,
+    test_values
 )
 
 # Create your views here.
 def init(request):
-    if request.method != "GET":
-        return JsonResponse({
-            "data": "Sorry not found"
-        }, status=400)
-    
-
     name = request.GET.get("name")
     age = int(request.GET.get("age"))
     sex = request.GET.get("sex")
@@ -36,6 +31,8 @@ def init(request):
     city = request.GET.get("city")
     phone = request.GET.get("phone")
     text = request.GET.get("text")
+
+    print(city)
 
     patient = Patient.objects.create(
         name = name,
@@ -133,7 +130,7 @@ def continue_query(request):
 def get_tests(request):
     key = request.GET.get('key')
     specialization = request.GET.get('specialist')
-    address = request.GET.get('address')
+    address = Inferma.objects.get(key=key).patient.city.title()
     lst = specialists.get(address.title()).get(specialization.lower())
     return JsonResponse({
         'key': key,
@@ -151,6 +148,49 @@ def set_specialist(request):
         doctor = doctor
     )
 
+    return JsonResponse({
+        'success': True
+    })
+
+def get_patient_data(request):
+    key = request.GET.get('key')
+    doctor = Doctor.objects.get(key=key)
+    diagnostics = doctor.diagnostics.all()
+    lst = []
+    for diagnostic in diagnostics:
+        patient = diagnostic.patient.serialize()
+        patient['emergency'] = diagnostic.emergency
+        tests = diagnostic.tests.all().order_by('-time')
+        patient['tests'] = dict()
+        for test in tests:
+            if patient['tests'].get(test.name):
+                patient['tests'][test.name].append(test.serialize())
+            else:
+                patient['tests'][test.name] = []
+                patient['tests'][test.name].append(test.serialize())
+        lst.append(patient)
+    return JsonResponse(lst, safe=False)
+
+def randomize(request):
+    lst = []
+    for patient in Patient.objects.all():
+        diagnostic = patient.diagnostics.first()
+        specialization = diagnostic.doctor.department
+        tests = all_tests[specialization]
+        for test in tests:
+            values = test_values[test]
+            if isinstance(values['pot_max'], int):
+                value = randint(values['pot_min'], values['pot_max'])
+            else:
+                value = round(uniform(values['pot_min'], values['pot_max']), 1)
+            Test.objects.create(
+                name = test,
+                value = value,
+                unit = values['unit'],
+                diagnostic = diagnostic
+            )
+
+    
     return JsonResponse({
         'success': True
     })

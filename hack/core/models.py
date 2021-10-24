@@ -15,6 +15,16 @@ class Patient(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+    def serialize(self):
+        return {
+            'name': self.name,
+            'age': self.age,
+            'sex': self.sex,
+            'height': self.height,
+            'weight': self.weight,
+            'phone': self.phone
+        }
 
 
 class Inferma(models.Model):
@@ -65,9 +75,17 @@ class Diagnostic(models.Model):
 class Test(models.Model):
     name = models.CharField(max_length=64)
     value = models.FloatField()
-    unit = models.CharField(max_length=16)
+    unit = models.CharField(max_length=64)
     diagnostic = models.ForeignKey(Diagnostic, on_delete=models.CASCADE, related_name='tests')
     time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.diagnostic.patient} - {self.diagnostic.doctor} - {self.time}"
+
+    def serialize(self):
+        return {
+            'value': self.value,
+            'unit': self.unit,
+            'date': self.time.strftime("%d %b, %Y"),
+            'time': self.time.strftime("%H:%M")
+        }

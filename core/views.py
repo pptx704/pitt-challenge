@@ -41,7 +41,7 @@ def init(request):
         height = height,
         weight = weight,
         street = street,
-        city = city,
+        city = city.title(),
         phone = phone
     )
     response = init_inf(age=age, sex=sex, text=text)
@@ -159,6 +159,7 @@ def get_patient_data(request):
     lst = []
     for diagnostic in diagnostics:
         patient = diagnostic.patient.serialize()
+        patient['key'] = diagnostic.patient.inferma.key
         patient['emergency'] = diagnostic.emergency
         tests = diagnostic.tests.all().order_by('-time')
         patient['tests'] = dict()
@@ -171,8 +172,16 @@ def get_patient_data(request):
         lst.append(patient)
     return JsonResponse(lst, safe=False)
 
+def toggle_emergency(request):
+    key = request.GET.get('key')
+    diagnostic = Inferma.objects.get(key=key).patient.diagnostics.first()
+    diagnostic.emergency = not diagnostic.emergency
+    diagnostic.save()
+    return JsonResponse({
+        "success": True
+    })
+
 def randomize(request):
-    lst = []
     for patient in Patient.objects.all():
         diagnostic = patient.diagnostics.first()
         specialization = diagnostic.doctor.department

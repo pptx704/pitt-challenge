@@ -1,10 +1,14 @@
 import requests
 import json
-headers = {
-    'App-Id': 'f36da8cb',
-    'App-Key': '4118763919853a3688b367fd81420e82',
-    'Content-Type': 'application/json',
-}
+from os import path
+
+with open(path.join(path.dirname(__file__), 'secrets.json'), 'r') as secret:
+    data = json.loads(secret.read())
+    headers = {
+        'App-Id': data.get('App-Id'),
+        'App-Key': data.get('App-Key'),
+        'Content-Type': 'application/json',
+    }
 
 
 def init_req_to_inf(data_dict):

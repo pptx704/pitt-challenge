@@ -1,1 +1,2 @@
-hack/database.db
+database.db
+core/secrets.json

@@ -47,7 +47,7 @@
 
 
 
-| Diagnostic | Table to establish patient-doctor relation |
+| Diagnostic | Table to establish patient-doctor relation ||
 | --- | --- | --- |
 | patient | foreignkey to a row in 'Patient' | To track the patient |
 | doctor | foreignkey to a row in 'Doctor' | To track the doctor |

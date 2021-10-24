@@ -85,13 +85,13 @@
 
 ```json
 {
-    "key": string,
-    "complete": bool,
-    "question": string,
+    "key": "string",
+    "complete": "bool",
+    "question": "string",
     "choices": [
         {
-            "id": string,
-            "label": string
+            "id": "string",
+            "label": "string"
         }
     ]
 }
@@ -112,13 +112,13 @@
 
 ```json
 {
-    "key": string,
+    "key": "string",
     "complete": false,
-    "question": string,
+    "question": "string",
     "choices": [
         {
-            "id": string,
-            "label": string
+            "id": "string",
+            "label": "string"
         }
     ]
 }
@@ -128,9 +128,9 @@
 
 ```json
 {
-    "key": string,
+    "key": "string",
     "complete": true,
-    "specialization": string
+    "specialization": "string"
 }
 ```
 
@@ -149,16 +149,16 @@
 
 ```json
 {
-    "key": string,
+    "key": "string",
     "tests": [
-   		string
+   		"string"
     ],
     "specialists": [
         {
-        "id": string,
-        "name": string,
-        "address": string,
-        "email": string
+        "id": "string",
+        "name": "string",
+        "address": "string",
+        "email": "string"
         }
     ]
 }
@@ -177,9 +177,9 @@
 
 **Response**:
 
-```
+```json
 {
-	"success": bool
+	"success": "bool"
 }
 ```
 
@@ -198,21 +198,21 @@
 ```json
 [
     {
-        "name": string,
-        "age": int,
-        "sex": string,
-        "height": float,
-        "weight": int,
-        "phone": string,
-        "key": string, //patient key from init api
-        "emergency": bool,
+        "name": "string",
+        "age": "int",
+        "sex": "string",
+        "height": "float",
+        "weight": "int",
+        "phone": "string",
+        "key": "string", //patient key from init api
+        "emergency": "bool",
         "tests": {
         "Test Name": [
                 {
-                    "value": int,
-                    "unit": str,
-                    "date": str, // "01 Jan, 1968"
-                    "time": str // "14:20"
+                    "value": "int",
+                    "unit": "string",
+                    "date": "string", // "01 Jan, 1968"
+                    "time": "string" // "14:20"
                 }
             ]
         }
@@ -232,9 +232,9 @@
 
 **Response**:
 
-```
+```json
 {
-	"success": bool
+	"success": "bool"
 }
 ```
 
